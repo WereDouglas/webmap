@@ -67,17 +67,20 @@ class Location extends CI_Controller {
         $username = $this->input->post('username');
         $lat = $this->input->post('lat');
         $long = $this->input->post('long');
-
+/**
         $username = "Douglas";
         $userid = "23";
         $lat = "0.3417913";
         $long = "32.5943488";
-
+**/
 
 
         $created = date('Y-m-d H:i:s');
         if ($username != "") {
-           // $results = $this->Md->query("select * from location where username ='" . $username . "' AND lat ='" . $lat . "' AND lng='" . $long . "'  AND  DATE(created)='".date('Y-m-d')."'  AND   TIME (created)='".date('H:i:s')."' AND HOUR(created)='".date('H')."' ");
+            $results = $this->Md->query("select * from location where username ='" . $username . "'");
+            
+            if($results){
+            
             $resulte = $this->Md->query("select max(id) as lastid,lat as lat ,lng as lng from location where username ='" . $username . "'");
              // $b["posted"] =  $results;
              
@@ -106,7 +109,14 @@ class Location extends CI_Controller {
                   
                   echo json_encode($b); 
               }
-              
+        }else{
+                $locate = array('username' => $username, 'userid' => "",'distance' => "0", 'lat' => $lat, 'lng' => $long, 'created' => $created);
+                $this->Md->save($locate, 'location');
+
+                $b["distance"] = "submitted first one";
+                echo json_encode($b);
+            
+        }
               
            
         } else {
