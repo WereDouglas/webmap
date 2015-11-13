@@ -76,17 +76,33 @@ class Location extends CI_Controller {
         $lat = "0.3417913";
         $long ="32.5943488";
         
-        **/
+        **/         
+        
         $created = date('Y-m-d H:i:s');
         if ($username!=""){
-         $locate = array('username' => $username, 'userid' => "", 'lat' => $lat, 'long' =>$long, 'created' => $created);
-         $this->Md->save($locate, 'location');
-         echo 'posted';
+              $results  = $this->Md->query("select * from location where username ='".$username."' AND lat ='".$lat."' AND long='".$long."' AND day(created)='".date('d')."' AND  hour (created)='".date('H')."'");
+      
+             if($results){
+                
+                  $b["posted"] = "same location";
+                  echo json_encode($b);
+        
+             }
+             else{
+                  $locate = array('username' => $username, 'userid' => "", 'lat' => $lat, 'long' =>$long, 'created' => $created);
+                  $this->Md->save($locate, 'location');
+                 
+                  $b["posted"] = "submitted";
+                  echo json_encode($b);
+                  
+             }
     }
     else{
         
-        echo 'invalid user';
+       $b["posted"] = "invalid user";
+        echo json_encode($b);
     }
+    
       
     }    
    
