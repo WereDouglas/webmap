@@ -85,14 +85,16 @@ class Location extends CI_Controller {
              // $b["posted"] =  $results;
              
               foreach ($resulte as $res){
-                $b["lat"] =  $res->lat; 
+                 $b["lat"] =  $res->lat; 
                  $b["lng"] = $res->lng;                  
                 // distance(32.9697, -96.80322, 29.46786, -98.53506, "M") . " Miles<br>";
                  $lat2 = $res->lat; 
                  $lng2 = $res->lng; 
                  // $b["distance"] = $this->distance(32.9697, -96.80322, 29.46786, -98.53506, "K") . "Km";
                  $distance = $this->distance($lat, $long, $lat2,$lng2, "K");
-                  $b["distance"]= ($distance*1000)."metres";                  
+                   $distance = ($distance*1000);   
+                     $distance = $distance;
+                      $b["distance"]= $distance."metres";   
                  /// echo json_encode($b);
                   
              if ($distance<50) {
@@ -105,7 +107,7 @@ class Location extends CI_Controller {
 
                 $b["distance"] = "submitted";
                 echo json_encode($b);
-            }                 
+            }               
                   
                   echo json_encode($b); 
               }
