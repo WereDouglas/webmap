@@ -93,18 +93,18 @@ class Location extends CI_Controller {
                  // $b["distance"] = $this->distance(32.9697, -96.80322, 29.46786, -98.53506, "K") . "Km";
                  $distance = $this->distance($lat, $long, $lat2,$lng2, "K");
                    $distance = ($distance*1000);   
-                     $distance = number_format($distance,1);
-                      $b["distance"]= $distance."metres";   
+                   $distancem = number_format($distance,1);
+                   $b["distance"]= $distance."metres";   
                  /// echo json_encode($b);
                   
-             if ($distance<15) {
+             if ($distancem<10) {
 
-                $b["distance"] = "too short".$distance;
+                $b["distance"] = "too short".$distancem;
                 echo json_encode($b);
                 
                 
             } else {
-                $locate = array('username' => $username, 'userid' => "",'distance' => $distance, 'lat' => $lat, 'lng' => $long, 'created' => $created);
+                $locate = array('username' => $username, 'userid' => "",'distance' => $distancem, 'lat' => $lat, 'lng' => $long, 'created' => $created);
                 $this->Md->save($locate, 'location');
 
                 $b["distance"] = "submitted";
