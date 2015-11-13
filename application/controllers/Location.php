@@ -92,14 +92,14 @@ class Location extends CI_Controller {
                  $lng2 = $res->lng; 
                  // $b["distance"] = $this->distance(32.9697, -96.80322, 29.46786, -98.53506, "K") . "Km";
                  $distance = $this->distance($lat, $long, $lat2,$lng2, "K");
-                   $distance = ($distance*1000);   
-                   $distancem = number_format($distance,1);
-                   $b["distance"]= $distance."metres";   
+                 $distance = ($distance*1000);   
+                 $distancem = number_format($distance,1);
+                  // $b["distance"]= $distance."metres";   
                  /// echo json_encode($b);
                   
              if ($distancem<10) {
 
-                $b["distance"] = "too short".$distancem;
+                $b["distance"] = " too short ".$distancem."m";
                 echo json_encode($b);
                 
                 
