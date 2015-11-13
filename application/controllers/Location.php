@@ -97,7 +97,7 @@ class Location extends CI_Controller {
                 $b["distance"] = "too short";
                 echo json_encode($b);
             } else {
-                $locate = array('username' => $username, 'userid' => "", 'lat' => $lat, 'lng' => $long, 'created' => $created);
+                $locate = array('username' => $username, 'userid' => "",'distance' => $distance, 'lat' => $lat, 'lng' => $long, 'created' => $created);
                 $this->Md->save($locate, 'location');
 
                 $b["distance"] = "submitted";

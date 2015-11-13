@@ -40,7 +40,39 @@
                     </div> <!-- /.googlemap-wrapper -->
                 </div> <!-- /.col-md-12 -->
             </div> <!-- /.row -->
+     <table class="jobs table table-striped table-bordered bootstrap-datatable datatable" id="datatable">
+                                    <thead>
+                                        <tr>  
+                                            <th>Latitude</th>
+                                            <th>Longitude</th>
+                                             <th>Distance</th>
+                                            <th>Created on:</th>
+                                           
+                                        </tr>
+                                    </thead>   
+                                    <tbody>
 
+                                        <?php
+                                        if (is_array($locations) && count($locations)) {
+                                              foreach ($locations as $loop) {  
+                                                ?>  
+                                                <tr >                                                   
+                                                    <td><?=$loop->lat?> </td>
+                                                     <td><?=$loop->lng?> </td>
+                                                        <td><?=$loop->distance?> </td>
+                                                           <td><?=$loop->created?> </td>
+                                                      
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+
+
+
+
+                                    </tbody>
+                                </table>     
         </div> <!-- /.container -->
 
 
