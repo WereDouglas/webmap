@@ -94,12 +94,12 @@ if (is_array($locations) && count($locations)) {
              $image = base_url()."uploads/".$loop->image;
             
         }
-        if($loop->lat!=""&&$loop->long!=""){
+        if($loop->lat!=""&&$loop->lng!=""){
         ?>
 
 
                         // To add the marker to the map, use the 'map' property
-                        var myLatlng = new google.maps.LatLng(<?= $loop->lat; ?>,<?= $loop->long; ?>);
+                        var myLatlng = new google.maps.LatLng(<?= $loop->lat; ?>,<?= $loop->lng; ?>);
 
                       
                         var image = '<?= $image; ?>';

@@ -65,7 +65,7 @@
         <?php if(is_array($locations) && count($locations) ) {
 						           // var_dump($locations);
             $lat = $locations[count($locations)-1]->lat;
-           $lng= $locations[count($locations)-1]->long;
+           $lng= $locations[count($locations)-1]->lng;
 		// $lat = '0.3417913';
         echo   $created= $locations[count($locations)-1]->created;			
             }
@@ -119,7 +119,7 @@ var markers = [
     {
         "title": '<?php echo $loop -> created; ?>',
         "lat": '<?php echo $loop -> lat; ?>',
-        "lng": '<?php echo $loop -> long; ?>',
+        "lng": '<?php echo $loop -> lng; ?>',
         "description":' <?php echo $loop ->username ; ?>'
     },
 	
