@@ -45,7 +45,8 @@
                                         <tr>  
                                             <th>Latitude</th>
                                             <th>Longitude</th>
-                                             <th>Distance</th>
+                                             <th>Distance(m)</th>
+                                              <th>Distance(Km)</th>
                                             <th>Created on:</th>
                                            
                                         </tr>
@@ -60,6 +61,7 @@
                                                     <td><?=$loop->lat?> </td>
                                                      <td><?=$loop->lng?> </td>
                                                         <td><?=$loop->distance?> </td>
+                                                         <td><?php echo (($loop->distance)/1000);?> </td>
                                                            <td><?=$loop->created?> </td>
                                                       
                                                 </tr>
