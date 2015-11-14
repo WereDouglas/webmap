@@ -64,10 +64,11 @@ class Location extends CI_Controller {
           client.post("http://192.168.1.129/webmap/index.php/location/save",params ,new AsyncHttpResponseHandler()
          * 
          * * */
+   
         $username = $this->input->post('username');
         $lat = $this->input->post('lat');
         $long = $this->input->post('long');
-/**
+     /**
         $username = "Douglas";
         $userid = "23";
         $lat = "0.3417913";
@@ -87,10 +88,11 @@ class Location extends CI_Controller {
                 echo json_encode($b);
                 return;
             }            
-            $resulte = $this->Md->query_single("select max(id) as id,lat as lat ,lng as lng from location where username ='".$username."'");
+            $resulte = $this->Md->query("select max(id) as id,lat as lat ,lng as lng from location where username ='".$username."'");
              // $b["posted"] =  $results;
              
               foreach ($resulte as $res){
+                  
                  $b["lat"] =  $res->lat; 
                  $b["lng"] = $res->lng;                  
                 // distance(32.9697, -96.80322, 29.46786, -98.53506, "M") . " Miles<br>";
@@ -100,17 +102,18 @@ class Location extends CI_Controller {
                  $dist = $this->distance($lat, $long, $lat2,$lng2, "K");
                  $distance = ($dist*1000);   
                  $distancem = number_format($distance,1);
-                 $b["distance"]= $distance."metres";   
+                 $b["distance"]= $distancem."metres";   
                  /// echo json_encode($b);                 
                    
-              if ($lat==$lat2 && $long==$lng2){
-                  
-                 $b["distance"] = "same location";
-                 echo json_encode($b);
-                
-              }
-                  else{
-             if ($distancem<10) {
+       if($lat==$lat2 && $long==$lng2){
+             $b["distance"]= $distancem."m  same location";   
+             echo json_encode($b);  
+             
+             return;
+           
+           
+       }else{
+             if ($distancem<=9) {
 
                 $b["distance"] = " too short ".$distancem."m";
                 echo json_encode($b);
@@ -124,8 +127,8 @@ class Location extends CI_Controller {
                 echo json_encode($b);
                }  
                
+       
               }
-              
                   
                   echo json_encode($b); 
               }
