@@ -131,7 +131,7 @@ class User extends CI_Controller {
         $username = $this->uri->segment(3);
 
         $data['username'] = $username;
-        $all = $this->Md->query("select * from location where username = '" . $username . "' LIMIT 20");
+        $all = $this->Md->query("select * from location where username = '" . $username . "' order by id desc");
         $data['locations'] = $all;
         $this->load->view('view-user', $data);
     }

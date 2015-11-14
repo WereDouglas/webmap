@@ -64,126 +64,116 @@ class Location extends CI_Controller {
           client.post("http://192.168.1.129/webmap/index.php/location/save",params ,new AsyncHttpResponseHandler()
          * 
          * * */
-   
         $username = $this->input->post('username');
         $lat = $this->input->post('lat');
         $long = $this->input->post('long');
-     /**
-        $username = "Douglas";
-        $userid = "23";
-        $lat = "0.3417913";
-        $long = "32.5943488";
-**/
-
-
+        /**
+          $username = "Douglas";
+          $userid = "23";
+          $lat = "0.3417913";
+          $long = "32.5943488";
+         * */
         $created = date('Y-m-d H:i:s');
         if ($username != "") {
             $results = $this->Md->query("select * from location where username ='" . $username . "'");
-            
-            if(!$results){
-                
-                 $locate = array('username' => $username, 'userid' => "",'distance' => "0", 'lat' => $lat, 'lng' => $long, 'created' => $created);
+
+            if (!$results) {
+
+                $locate = array('username' => $username, 'userid' => "", 'distance' => "0", 'lat' => $lat, 'lng' => $long, 'created' => $created);
                 $this->Md->save($locate, 'location');
                 $b["distance"] = "submitted first one";
                 echo json_encode($b);
                 return;
-            }            
-            $resulte = $this->Md->query("select max(id) as id,lat as lat ,lng as lng from location where username ='".$username."'");
-             // $b["posted"] =  $results;
-             
-              foreach ($resulte as $res){
-                  
-                 $b["lat"] =  $res->lat; 
-                 $b["lng"] = $res->lng;                  
+            }
+            $resulte = $this->Md->query("select max(id) as id,lat as lat ,lng as lng from location where username ='" . $username . "'");
+            // $b["posted"] =  $results;
+
+            foreach ($resulte as $res) {
+
+                $b["lat"] = $res->lat;
+                $b["lng"] = $res->lng;
                 // distance(32.9697, -96.80322, 29.46786, -98.53506, "M") . " Miles<br>";
-                 $lat2 = $res->lat; 
-                 $lng2 = $res->lng; 
-                 // $b["distance"] = $this->distance(32.9697, -96.80322, 29.46786, -98.53506, "K") . "Km";
-                 $dist = $this->distance($lat, $long, $lat2,$lng2, "K");
-                 $distance = ($dist*1000);   
-                 $distancem = number_format($distance,1);
-                 $b["distance"]= $distancem."metres";   
-                 /// echo json_encode($b);                 
-                   
-       if($lat==$lat2 && $long==$lng2){
-             $b["distance"]= $distancem."m  same location";   
-             echo json_encode($b);  
-             
-             return;
-           
-           
-       }else{
-             if ($distancem<=9) {
+                $lat2 = $res->lat;
+                $lng2 = $res->lng;
+                // $b["distance"] = $this->distance(32.9697, -96.80322, 29.46786, -98.53506, "K") . "Km";
+                $dist = $this->distance($lat, $long, $lat2, $lng2, "K");
+                $distance = ($dist * 1000);
+                $distancem = number_format($distance, 1);
+                $b["distance"] = $distancem . "metres";
+                /// echo json_encode($b);                 
 
-                $b["distance"] = " too short ".$distancem."m";
-                echo json_encode($b);
-                
-             } 
-             else {
-                $locate = array('username' => $username, 'userid' => "",'distance' => $distancem, 'lat' => $lat, 'lng' => $long, 'created' => $created);
-                $this->Md->save($locate, 'location');
+                if ($lat == $lat2 && $long == $lng2) {
+                    $b["distance"] = $distancem . "m  same location";
+                    echo json_encode($b);
 
-                $b["distance"] = "submitted";
+                    return;
+                } else {
+                    if ($distancem <= 9) {
+
+                        $b["distance"] = " too short " . $distancem . "m";
+                        echo json_encode($b);
+                    } else {
+                        $locate = array('username' => $username, 'userid' => "", 'distance' => $distancem, 'lat' => $lat, 'lng' => $long, 'created' => $created);
+                        $this->Md->save($locate, 'location');
+
+                        $b["distance"] = "submitted";
+                        echo json_encode($b);
+                    }
+                }
+
                 echo json_encode($b);
-               }  
-               
-       
-              }
-                  
-                  echo json_encode($b); 
-              }
-        
-              
-           
+            }
         } else {
 
             $b["posted"] = "invalid user";
             echo json_encode($b);
         }
     }
-    /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-/*::                                                                         :*/
-/*::  This routine calculates the distance between two points (given the     :*/
-/*::  latitude/longitude of those points). It is being used to calculate     :*/
-/*::  the distance between two locations using GeoDataSource(TM) Products    :*/
-/*::                                                                         :*/
-/*::  Definitions:                                                           :*/
-/*::    South latitudes are negative, east longitudes are positive           :*/
-/*::                                                                         :*/
-/*::  Passed to function:                                                    :*/
-/*::    lat1, lon1 = Latitude and Longitude of point 1 (in decimal degrees)  :*/
-/*::    lat2, lon2 = Latitude and Longitude of point 2 (in decimal degrees)  :*/
-/*::    unit = the unit you desire for results                               :*/
-/*::           where: 'M' is statute miles                                   :*/
-/*::                  'K' is kilometers (default)                            :*/
-/*::                  'N' is nautical miles                                  :*/
-/*::  Worldwide cities and other features databases with latitude longitude  :*/
-/*::  are available at http://www.geodatasource.com                          :*/
-/*::                                                                         :*/
-/*::  For enquiries, please contact sales@geodatasource.com                  :*/
-/*::                                                                         :*/
-/*::  Official Web site: http://www.geodatasource.com                        :*/
-/*::                                                                         :*/
-/*::         GeoDataSource.com (C) All Rights Reserved 2014                  :*/
-/*::                                                                         :*/
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-public function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 
-  $theta = $lon1 - $lon2;
-  $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-  $dist = acos($dist);
-  $dist = rad2deg($dist);
-  $miles = $dist * 60 * 1.1515;
-  $unit = strtoupper($unit);
+    /* :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+    /* ::                                                                         : */
+    /* ::  This routine calculates the distance between two points (given the     : */
+    /* ::  latitude/longitude of those points). It is being used to calculate     : */
+    /* ::  the distance between two locations using GeoDataSource(TM) Products    : */
+    /* ::                                                                         : */
+    /* ::  Definitions:                                                           : */
+    /* ::    South latitudes are negative, east longitudes are positive           : */
+    /* ::                                                                         : */
+    /* ::  Passed to function:                                                    : */
+    /* ::    lat1, lon1 = Latitude and Longitude of point 1 (in decimal degrees)  : */
+    /* ::    lat2, lon2 = Latitude and Longitude of point 2 (in decimal degrees)  : */
+    /* ::    unit = the unit you desire for results                               : */
+    /* ::           where: 'M' is statute miles                                   : */
+    /* ::                  'K' is kilometers (default)                            : */
+    /* ::                  'N' is nautical miles                                  : */
+    /* ::  Worldwide cities and other features databases with latitude longitude  : */
+    /* ::  are available at http://www.geodatasource.com                          : */
+    /* ::                                                                         : */
+    /* ::  For enquiries, please contact sales@geodatasource.com                  : */
+    /* ::                                                                         : */
+    /* ::  Official Web site: http://www.geodatasource.com                        : */
+    /* ::                                                                         : */
+    /* ::         GeoDataSource.com (C) All Rights Reserved 2014                  : */
+    /* ::                                                                         : */
+    /* :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
 
-  if ($unit == "K") {
-    return ($miles * 1.609344);
-  } else if ($unit == "N") {
-      return ($miles * 0.8684);
-    } else {
-        return $miles;
-      }
-}
+    public function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+        $unit = strtoupper($unit);
+
+        if ($unit == "K") {
+            return ($miles * 1.609344);
+        } else if ($unit == "N") {
+            return ($miles * 0.8684);
+        } else {
+            return $miles;
+        }
+    }
 
 //echo distance(32.9697, -96.80322, 29.46786, -98.53506, "M") . " Miles<br>";
 //echo distance(32.9697, -96.80322, 29.46786, -98.53506, "K") . " Kilometers<br>";
