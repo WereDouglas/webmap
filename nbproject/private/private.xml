@@ -5,10 +5,9 @@
         <group>
             <file>file:/C:/wamp/www/webmap/application/controllers/User.php</file>
             <file>file:/C:/wamp/www/webmap/application/views/view-user.php</file>
-            <file>file:/C:/wamp/www/webmap/application/views/header.php</file>
-            <file>file:/C:/wamp/www/webmap/application/views/user.php</file>
             <file>file:/C:/wamp/www/webmap/application/controllers/Location.php</file>
             <file>file:/C:/wamp/www/webmap/application/models/Md.php</file>
+            <file>file:/C:/wamp/www/webmap/application/views/home.php</file>
             <file>file:/C:/wamp/www/webmap/application/views/view-all.php</file>
         </group>
     </open-files>

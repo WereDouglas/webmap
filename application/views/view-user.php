@@ -43,6 +43,7 @@
      <table class="jobs table table-striped table-bordered bootstrap-datatable datatable" id="datatable">
                                     <thead>
                                         <tr>  
+                                            <th></th>
                                             <th>Latitude</th>
                                             <th>Longitude</th>
                                              <th>Distance(m)</th>
@@ -57,7 +58,8 @@
                                         if (is_array($locations) && count($locations)) {
                                               foreach ($locations as $loop) {  
                                                 ?>  
-                                                <tr >                                                   
+                                                <tr >    
+                                                     <td><?=$loop->id?> </td>
                                                     <td><?=$loop->lat?> </td>
                                                      <td><?=$loop->lng?> </td>
                                                         <td><?=$loop->distance?> </td>

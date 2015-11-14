@@ -79,9 +79,15 @@ class Location extends CI_Controller {
         if ($username != "") {
             $results = $this->Md->query("select * from location where username ='" . $username . "'");
             
-            if($results){
-            
-            $resulte = $this->Md->query("select max(id) as lastid,lat as lat ,lng as lng from location where username ='" . $username . "'");
+            if(!$results){
+                
+                 $locate = array('username' => $username, 'userid' => "",'distance' => "0", 'lat' => $lat, 'lng' => $long, 'created' => $created);
+                $this->Md->save($locate, 'location');
+                $b["distance"] = "submitted first one";
+                echo json_encode($b);
+                return;
+            }            
+            $resulte = $this->Md->query_single("select max(id) as id,lat as lat ,lng as lng from location where username ='".$username."'");
              // $b["posted"] =  $results;
              
               foreach ($resulte as $res){
@@ -91,36 +97,37 @@ class Location extends CI_Controller {
                  $lat2 = $res->lat; 
                  $lng2 = $res->lng; 
                  // $b["distance"] = $this->distance(32.9697, -96.80322, 29.46786, -98.53506, "K") . "Km";
-                 $distance = $this->distance($lat, $long, $lat2,$lng2, "K");
-                 $distance = ($distance*1000);   
+                 $dist = $this->distance($lat, $long, $lat2,$lng2, "K");
+                 $distance = ($dist*1000);   
                  $distancem = number_format($distance,1);
                   // $b["distance"]= $distance."metres";   
-                 /// echo json_encode($b);
-                  
+                 /// echo json_encode($b);                 
+                   
+              if ($lat==$lat2 && $long= $lng2){
+                      $b["distance"] = " same location";
+                echo json_encode($b);
+                 }
+                  else{
              if ($distancem<10) {
 
                 $b["distance"] = " too short ".$distancem."m";
                 echo json_encode($b);
                 
-                
-            } else {
+             } 
+             else {
                 $locate = array('username' => $username, 'userid' => "",'distance' => $distancem, 'lat' => $lat, 'lng' => $long, 'created' => $created);
                 $this->Md->save($locate, 'location');
 
                 $b["distance"] = "submitted";
                 echo json_encode($b);
-            }               
+               }  
+               
+              }
+              
                   
                   echo json_encode($b); 
               }
-        }else{
-                $locate = array('username' => $username, 'userid' => "",'distance' => "0", 'lat' => $lat, 'lng' => $long, 'created' => $created);
-                $this->Md->save($locate, 'location');
-
-                $b["distance"] = "submitted first one";
-                echo json_encode($b);
-            
-        }
+        
               
            
         } else {

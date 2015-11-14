@@ -79,7 +79,8 @@ class Md extends CI_Model {
     function query($string) {
 
         $query = $this->db->query($string);
-        $result = $query->result();
+       
+        $result = $query->result();      
         return $result;
     }
 
