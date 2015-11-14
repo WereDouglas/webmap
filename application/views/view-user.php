@@ -40,6 +40,7 @@
                     </div> <!-- /.googlemap-wrapper -->
                 </div> <!-- /.col-md-12 -->
             </div> <!-- /.row -->
+             
      <table class="jobs table table-striped table-bordered bootstrap-datatable datatable" id="datatable">
                                     <thead>
                                         <tr>  

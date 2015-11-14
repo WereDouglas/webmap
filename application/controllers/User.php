@@ -139,17 +139,12 @@ class User extends CI_Controller {
     public function movement() {
         $data['movements'] = "";
         $username = $this->input->post('username');
-        $username = 'douglas';
+       // $username = 'douglas';
         // $movement = $this->Md->query("select * from location where username = '".$username."' LIMIT 20");
 
 
          $movement = array();
          $movement = $this->Md->query("select * from location where username = '" . $username . " 'order by id desc");
-
-      
-        if ($movement) {
-            $data['movements'] = $movement;
-        }
 
         echo json_encode($movement);
     }
