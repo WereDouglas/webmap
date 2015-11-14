@@ -100,11 +100,11 @@
         <script src="<?= base_url(); ?>js/vendor/jquery.gmap3.min.js"></script> -->
 
         <?php if(is_array($locations) && count($locations) ) {
-						           // var_dump($locations);
-            $lat = $locations[count($locations)-1]->lat;
-           $lng= $locations[count($locations)-1]->lng;
+						           //var_dump($locations);
+            $lat = $locations[0]->lat;
+           $lng= $locations[0]->lng;
 		// $lat = '0.3417913';
-        echo   $created= $locations[count($locations)-1]->created;			
+        echo   "last posted".$created= $locations[0]->created;			
             }
 	?>
        
