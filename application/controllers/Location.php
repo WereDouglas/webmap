@@ -103,10 +103,12 @@ class Location extends CI_Controller {
                   // $b["distance"]= $distance."metres";   
                  /// echo json_encode($b);                 
                    
-              if ($lat==$lat2 && $long= $lng2){
-                      $b["distance"] = " same location";
-                echo json_encode($b);
-                 }
+              if ($lat==$lat2 && $long==$lng2){
+                  
+                 $b["distance"] = "same location";
+                 echo json_encode($b);
+                
+              }
                   else{
              if ($distancem<10) {
 
