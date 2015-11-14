@@ -108,7 +108,7 @@ class Location extends CI_Controller {
 
                     return;
                 } else {
-                    if ($distancem <= 9) {
+                    if ($distancem <= 20) {
 
                         $b["distance"] = " too short " . $distancem . "m";
                         echo json_encode($b);
