@@ -100,7 +100,7 @@ class Location extends CI_Controller {
                  $dist = $this->distance($lat, $long, $lat2,$lng2, "K");
                  $distance = ($dist*1000);   
                  $distancem = number_format($distance,1);
-                  // $b["distance"]= $distance."metres";   
+                 $b["distance"]= $distance."metres";   
                  /// echo json_encode($b);                 
                    
               if ($lat==$lat2 && $long==$lng2){
