@@ -121,7 +121,7 @@
         zoom: 14  
        
     };
-    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions); 
+    map = new google.maps.Map(document.getElementById("map_canvas_locations"), mapOptions); 
 	
      var myLatlng = new google.maps.LatLng(<?php echo $lat; ?>,<?php echo $lng; ?>);
 	 var image = '<?= base_url(); ?>images/walking.png'; 
