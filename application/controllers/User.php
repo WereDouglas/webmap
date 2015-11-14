@@ -131,7 +131,7 @@ class User extends CI_Controller {
         $username = $this->uri->segment(3);
 
         $data['username'] = $username;
-        $all = $this->Md->query("select * from location where username = '" . $username . "' order by id desc");
+        $all = $this->Md->query("select * from (select * from location where username = '" . $username . "'  order by id desc limit 12) location order by id desc");
         $data['locations'] = $all;
         $this->load->view('view-user', $data);
     }
@@ -144,7 +144,7 @@ class User extends CI_Controller {
 
 
          $movement = array();
-         $movement = $this->Md->query("select * from location where username = '" . $username . " 'order by id desc");
+         $movement = $this->Md->query("select * from (select * from location where username = '" . $username . "'  order by id desc limit 12) location order by id desc");
 
         echo json_encode($movement);
     }
