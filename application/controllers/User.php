@@ -143,20 +143,10 @@ class User extends CI_Controller {
         // $movement = $this->Md->query("select * from location where username = '".$username."' LIMIT 20");
 
 
-        $movement = array();
-        $query1 = $this->Md->query("select * from location where username = '" . $username . "' LIMIT 20");
+         $movement = array();
+         $movement = $this->Md->query("select * from location where username = '" . $username . " 'order by id desc");
 
-        /// var_dump($query1);
-        foreach ($query1 as $v) {
-            $resv = new stdClass();
-            $resv->lng = $v->lat;
-            $resv->lat = $v->lng;
-            $resv->created = $v->created;
-            array_push($movement, $resv);
-        }
-
-
-
+      
         if ($movement) {
             $data['movements'] = $movement;
         }
