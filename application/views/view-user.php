@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="googlemap-wrapper">
-                        <div id="map_canvas_locations" class="map-canvas_locations"></div>
+                        <div id="map_canvas_locations" class="map-canvas"></div>
                     </div> <!-- /.googlemap-wrapper -->
                 </div> <!-- /.col-md-12 -->
             </div> <!-- /.row -->
