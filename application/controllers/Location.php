@@ -105,7 +105,6 @@ class Location extends CI_Controller {
                 if ($lat == $lat2 && $long == $lng2) {
                     $b["distance"] = $distancem . "m  same location";
                     echo json_encode($b);
-
                     return;
                 } else {
                     if ($distancem <= 20) {
@@ -116,7 +115,7 @@ class Location extends CI_Controller {
                         $locate = array('username' => $username, 'userid' => "", 'distance' => $distancem, 'lat' => $lat, 'lng' => $long, 'created' => $created);
                         $this->Md->save($locate, 'location');
 
-                        $b["distance"] = "submitted";
+                        $b["distance"] = "submitted".' first lat: '.$lat.'second lat:'.$lat2.' first long: '.$long.' second long:'.$lng2;
                         echo json_encode($b);
                     }
                 }
