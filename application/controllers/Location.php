@@ -50,23 +50,9 @@ class Location extends CI_Controller {
     }
 
     public function save() {
-        
-     // echo $this->distance( 0.3419114 , 32.5944139 ,0.3419111 , 32.5944138 , "K");
-      //return;
-
-
-        //  $this->load->helper(array('form', 'url'));
-        /**
-         * 
-         *  params.put("username", "Doug");
-          params.put("userid", "23");
-          params.put("lat", lat);
-          params.put("long", lng);
-          //   Toast.makeText(getApplicationContext(), params.toString(), Toast.LENGTH_LONG).show();
-          // client.post("http://dodoreapi.azurewebsites.net/api/Location",params ,new AsyncHttpResponseHandler() {
-          client.post("http://192.168.1.129/webmap/index.php/location/save",params ,new AsyncHttpResponseHandler()
-         * 
-         * * */
+    
+         $this->load->helper(array('form', 'url'));
+      
         $username = $this->input->post('username');
         $lat = $this->input->post('lat');
         $long = $this->input->post('long');
