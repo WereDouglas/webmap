@@ -56,13 +56,14 @@ class Location extends CI_Controller {
         $username = $this->input->post('username');
         $lat = $this->input->post('lat');
         $long = $this->input->post('long');
-        /**
+     
           $username = "Douglas";
+             /**
           $userid = "23";
           $lat = "0.3417913";
           $long = "32.5943488";
          * */
-         $distancem =0;
+         
         $created = date('Y-m-d H:i:s');
         if ($username != "") {
             $results = $this->Md->query("select * from location where username ='" . $username . "'");
@@ -77,17 +78,21 @@ class Location extends CI_Controller {
             }
             $resulte = $this->Md->query("select max(id) as id,lat as lat ,lng as lng from location where username ='" . $username . "'" );
             // $b["posted"] =  $results;
-
+              $dist = 0;
+              $distance = 0;
+              $distancem =0;
+             
             foreach ($resulte as $res) {
 
-                $b["lat"] = $res->lat;
-                $b["lng"] = $res->lng;
+              $b["lat2"] = $res->lat;
+              $b["lng2"] = $res->lng;
                 // distance(32.9697, -96.80322, 29.46786, -98.53506, "M") . " Miles<br>";
                 $lat2 = $res->lat;
                 $lng2 = $res->lng;
+                
+            }
                 // $b["distance"] = $this->distance(32.9697, -96.80322, 29.46786, -98.53506, "K") . "Km";
-                 $dist = 0;
-                   $distance = 0;
+               
                 $dist = $this->distance($lat, $long, $lat2, $lng2, "K");
                 $distance = ($dist * 1000);
                 $distancem = number_format($distance, 1);
@@ -98,8 +103,7 @@ class Location extends CI_Controller {
                     $b["distance"] = $distancem . "m  same location";
                     echo json_encode($b);
                     return;
-                } else {
-                    if ($distancem <= 20) {
+                } elseif($distancem <= 20) {                 
 
                         $b["distance"] = " too short " . $distancem . "m";
                         echo json_encode($b);
@@ -109,11 +113,8 @@ class Location extends CI_Controller {
 
                         $b["distance"] = "submitted".' first lat: '.$lat.'second lat:'.$lat2.' first long: '.$long.' second long:'.$lng2;
                         echo json_encode($b);
-                    }
-                }
+                    }              
 
-                echo json_encode($b);
-            }
         } else {
 
             $b["posted"] = "invalid user";
