@@ -89,7 +89,7 @@ class Location extends CI_Controller {
                 echo json_encode($b);
                 return;
             }
-            $resulte = $this->Md->query("select max(id) as id,lat as lat ,lng as lng from location where username ='" . $username . "' order by id desc" );
+            $resulte = $this->Md->query("select max(id) as id,lat as lat ,lng as lng from location where username ='" . $username . "'" );
             // $b["posted"] =  $results;
 
             foreach ($resulte as $res) {
