@@ -100,6 +100,8 @@ class Location extends CI_Controller {
                 $lat2 = $res->lat;
                 $lng2 = $res->lng;
                 // $b["distance"] = $this->distance(32.9697, -96.80322, 29.46786, -98.53506, "K") . "Km";
+                 $dist = 0;
+                   $distance = 0;
                 $dist = $this->distance($lat, $long, $lat2, $lng2, "K");
                 $distance = ($dist * 1000);
                 $distancem = number_format($distance, 1);
