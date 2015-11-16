@@ -50,6 +50,9 @@ class Location extends CI_Controller {
     }
 
     public function save() {
+        
+     // echo $this->distance( 0.3419114 , 32.5944139 ,0.3419111 , 32.5944138 , "K");
+      //return;
 
 
         //  $this->load->helper(array('form', 'url'));
@@ -73,6 +76,7 @@ class Location extends CI_Controller {
           $lat = "0.3417913";
           $long = "32.5943488";
          * */
+         $distancem =0;
         $created = date('Y-m-d H:i:s');
         if ($username != "") {
             $results = $this->Md->query("select * from location where username ='" . $username . "'");
