@@ -58,11 +58,11 @@ class Location extends CI_Controller {
         $long = $this->input->post('long');
         
      
-          $username = "Douglas";
+         // $username = "Douglas";
             
          // $userid = "23";
-          $lat = "0.2207913";
-          $long = "32.7943488";
+          //$lat = "0.2207913";
+          //$long = "32.7943488";
        
           
               $dist = 0;
