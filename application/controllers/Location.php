@@ -56,13 +56,18 @@ class Location extends CI_Controller {
         $username = $this->input->post('username');
         $lat = $this->input->post('lat');
         $long = $this->input->post('long');
+        
      
-          $username = "Douglas";
+          //$username = "Douglas";
              /**
           $userid = "23";
           $lat = "0.3417913";
           $long = "32.5943488";
          * */
+          
+           $dist = 0;
+              $distance = 0;
+              $distancem =0;
          
         $created = date('Y-m-d H:i:s');
         if ($username != "") {
@@ -78,9 +83,7 @@ class Location extends CI_Controller {
             }
             $resulte = $this->Md->query("select max(id) as id,lat as lat ,lng as lng from location where username ='" . $username . "'" );
             // $b["posted"] =  $results;
-              $dist = 0;
-              $distance = 0;
-              $distancem =0;
+             
              
             foreach ($resulte as $res) {
 
@@ -100,7 +103,7 @@ class Location extends CI_Controller {
                 /// echo json_encode($b);                 
 
                 if ($lat == $lat2 && $long == $lng2) {
-                    $b["distance"] = $distancem . "m  same location";
+                    $b["distance"] = $distancem . "m same location";
                     echo json_encode($b);
                     return;
                 } elseif($distancem <= 20) {                 
