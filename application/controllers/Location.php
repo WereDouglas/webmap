@@ -91,9 +91,9 @@ class Location extends CI_Controller {
                 $lng2 = $res->lng;
                 
             }
-                // $b["distance"] = $this->distance(32.9697, -96.80322, 29.46786, -98.53506, "K") . "Km";
+             //  echo $b["distance"] = $this->distance(0.3419071 , 32.5944203 , 0.3419071 , 32.5944204 , "K") . "Km";
                
-                $dist = $this->distance($lat, $long, $lat2, $lng2, "K");
+                $dist = $this->distance( $lat2, $lng2,$lat, $long, "K");
                 $distance = ($dist * 1000);
                 $distancem = number_format($distance, 1);
                 $b["distance"] = $distancem . "metres";
